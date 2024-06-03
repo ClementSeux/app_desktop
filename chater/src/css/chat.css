@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#home-screen {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 80vh;
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #260e35;
+}
+
+#chat-container p {
+  transform: translatey(0px);
+  animation: float 5s ease-in-out infinite;
+  max-width: max(50%, 300px);
+  min-width: 125px;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: pretty;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 15px;
+  color: #202935;
+  background-color: #ece5ce;
+  padding: 30px;
+  border-radius: 11px;
+  position: relative;
+  box-shadow: 20px 20px #e5ff00;
+  font-family: "Baloo 2", cursive;
+}
+#chat-container p.last {
+  margin-bottom: 80px;
+}
+#chat-container p.left.last:after {
+  transform: translatey(0px);
+  animation: float2 5s ease-in-out infinite;
+  content: ".";
+  font-weight: bold;
+  -webkit-text-fill-color: #ece5ce;
+  text-shadow: 22px 22px #e5ff00;
+  text-align: left;
+  font-size: 55px;
+  width: 55px;
+  height: 11px;
+  line-height: 30px;
+  border-radius: 11px;
+  background-color: #ece5ce;
+  position: absolute;
+  display: block;
+  bottom: -30px;
+  left: 0px;
+  box-shadow: 22px 22px #e5ff00;
+  z-index: -2;
+}
+#chat-container p.right.last:after {
+  transform: translatey(0px);
+  animation: float2 5s ease-in-out infinite;
+  content: ".";
+  font-weight: bold;
+  -webkit-text-fill-color: #ece5ce;
+  text-shadow: 22px 22px #e5ff00;
+  text-align: left;
+  font-size: 55px;
+  width: 55px;
+  height: 11px;
+  line-height: 30px;
+  border-radius: 11px;
+  background-color: #ece5ce;
+  position: absolute;
+  display: block;
+  bottom: -30px;
+  right: 0px;
+  box-shadow: 22px 22px #e5ff00;
+  z-index: -2;
+}
+
+.left {
+  align-self: flex-start;
+}
+
+.message-bubble {
+  --r: 25px; /* the radius */
+  --t: 30px; /* the size of the tail */
+  max-width: 300px;
+  padding: calc(2 * var(--r) / 3);
+  margin: 10px;
+  -webkit-mask: radial-gradient(var(--t) at var(--_d) 0, rgba(0, 0, 0, 0) 98%, #000 102%) var(--_d) 100%/calc(100% - var(--r)) var(--t) no-repeat, conic-gradient(at var(--r) var(--r), #000 75%, rgba(0, 0, 0, 0) 0) calc(var(--r) / -2) calc(var(--r) / -2) padding-box, radial-gradient(50% 50%, #000 98%, rgba(0, 0, 0, 0) 101%) 0 0/var(--r) var(--r) space padding-box;
+  background: white border-box;
+  color: #fff;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+@keyframes float2 {
+  0% {
+    line-height: 30px;
+    transform: translatey(0px);
+  }
+  55% {
+    transform: translatey(-20px);
+  }
+  60% {
+    line-height: 10px;
+  }
+  100% {
+    line-height: 30px;
+    transform: translatey(0px);
+  }
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+form input {
+  width: 90vw;
+  height: 10vh;
+  margin: 0;
+  padding: 0px 0px 0px 10px;
+  background-color: #ece5ce;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #202935;
+  font-family: "Baloo 2", cursive;
+}
+form button {
+  width: 10vw;
+  height: 10vh;
+  margin: 0;
+  padding: 0;
+  background-color: #ece5ce;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #202935;
+  font-family: "Baloo 2", cursive;
+}/*# sourceMappingURL=chat.css.map */

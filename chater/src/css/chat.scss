@@ -1,0 +1,196 @@
+$color-blue: #e5ff00;
+$color-green: #c8c8a9;
+$color-brown: #202935;
+$color-beige: #ece5ce;
+$color-yellow: #260e35;
+$color-pink: #d943fe;
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#home-screen {
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 80vh;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: $color-yellow;
+}
+
+#chat-container p {
+    transform: translatey(0px);
+    animation: float 5s ease-in-out infinite;
+    max-width: max(50%, 300px);
+    min-width: 125px;
+
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: pretty;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 15px;
+    color: $color-brown;
+    background-color: $color-beige;
+    padding: 30px;
+    border-radius: 11px;
+    position: relative;
+    box-shadow: 20px 20px $color-blue;
+    font-family: "Baloo 2", cursive;
+    // border: 1px solid $color-green;
+    &.last {
+        margin-bottom: 80px;
+    }
+
+    &.left.last:after {
+        transform: translatey(0px);
+        animation: float2 5s ease-in-out infinite;
+        content: ".";
+        font-weight: bold;
+        -webkit-text-fill-color: $color-beige;
+        text-shadow: 22px 22px $color-blue;
+        text-align: left;
+        font-size: 55px;
+        width: 55px;
+        height: 11px;
+        line-height: 30px;
+        border-radius: 11px;
+        background-color: $color-beige;
+        position: absolute;
+        display: block;
+        bottom: -30px;
+        left: 0px;
+        box-shadow: 22px 22px $color-blue;
+        z-index: -2;
+    }
+    &.right.last:after {
+        transform: translatey(0px);
+        animation: float2 5s ease-in-out infinite;
+        content: ".";
+        font-weight: bold;
+        -webkit-text-fill-color: $color-beige;
+        text-shadow: 22px 22px $color-blue;
+        text-align: left;
+        font-size: 55px;
+        width: 55px;
+        height: 11px;
+        line-height: 30px;
+        border-radius: 11px;
+        background-color: $color-beige;
+        position: absolute;
+        display: block;
+        bottom: -30px;
+        right: 0px;
+        box-shadow: 22px 22px $color-blue;
+        z-index: -2;
+    }
+}
+
+.left {
+    align-self: flex-start;
+}
+// .right {
+//     place-self: end;
+//     margin-right: 25px;
+// }
+
+.message-bubble {
+    --r: 25px; /* the radius */
+    --t: 30px; /* the size of the tail */
+
+    max-width: 300px;
+    padding: calc(2 * var(--r) / 3);
+    margin: 10px;
+    -webkit-mask: radial-gradient(var(--t) at var(--_d) 0, #0000 98%, #000 102%)
+            var(--_d) 100% / calc(100% - var(--r)) var(--t) no-repeat,
+        conic-gradient(at var(--r) var(--r), #000 75%, #0000 0)
+            calc(var(--r) / -2) calc(var(--r) / -2) padding-box,
+        radial-gradient(50% 50%, #000 98%, #0000 101%) 0 0 / var(--r) var(--r)
+            space padding-box;
+    background: white border-box;
+    color: #fff;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+@keyframes float2 {
+    0% {
+        line-height: 30px;
+        transform: translatey(0px);
+    }
+    55% {
+        transform: translatey(-20px);
+    }
+    60% {
+        line-height: 10px;
+    }
+    100% {
+        line-height: 30px;
+        transform: translatey(0px);
+    }
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    & input {
+        width: 90vw;
+        height: 10vh;
+        margin: 0;
+        padding: 0px 0px 0px 10px;
+        background-color: $color-beige;
+        border: none;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: $color-brown;
+        font-family: "Baloo 2", cursive;
+    }
+
+    & button {
+        width: 10vw;
+        height: 10vh;
+        margin: 0;
+        padding: 0;
+        background-color: $color-beige;
+        border: none;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: $color-brown;
+        font-family: "Baloo 2", cursive;
+    }
+}
