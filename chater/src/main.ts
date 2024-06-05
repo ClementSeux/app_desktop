@@ -2,10 +2,18 @@ import { app, BrowserWindow, ipcMain, Tray, Menu, nativeImage } from "electron";
 import io from "socket.io-client";
 import path from "path";
 
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database("path/to/your/database.db");
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
     app.quit();
 }
+
+const convos = [
+    { users: ["Clement", "Alice"], id: 4526 },
+    { users: ["Clement", "Thanos"], id: 4529 },
+];
 
 const socket = io("ws://localhost:3000");
 
@@ -40,15 +48,26 @@ const createWindow = () => {
         mainWindow.webContents.send("socket-message", msg, sender);
     };
 
-    socket.on("message", handleMessages);
-    mainWindow.on("close", () => {
-        socket.off("message", handleMessages);
+    function createListeners(convoId: number) {
+        socket.on(`message-${convoId}`, (msg, sender) => {
+            console.log("Received message from main:", msg, sender, convoId);
+            mainWindow.webContents.send("socket-message", msg, sender, convoId);
+        });
+    }
+
+    for (const convo of convos) {
+        createListeners(convo.id);
+    }
+
+    socket.on("new-convo", (convoId) => {
+        console.log("New convo", convoId);
+        createListeners(convoId);
     });
 
-    ipcMain.on("socket-message", (_, msg, sender) => {
+    ipcMain.on("socket-message", (_, msg, sender, convoId) => {
         sender = "Clement";
-        console.log("Sending message from main:", msg, sender);
-        socket.emit("message", msg, sender);
+        console.log("Sending message from main:", msg, sender, convoId);
+        socket.emit(`message-${convoId}`, msg, sender);
     });
 };
 // This method will be called when Electron has finished

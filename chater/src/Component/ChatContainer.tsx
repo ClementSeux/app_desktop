@@ -3,32 +3,12 @@ import MessageBubble from '../Component/MessageBubble';
 import { useSocket , AppSocket} from '../Hooks/useSocketProvider';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Message } from '../Pages/Home';
 
 
 
-export default function ChatContainer() {
-    const [messages, setMessages] = useState([
-        {id : 1, message : "Hello darkness my old friend. How are you doing on this desperately depressing night ?", author : "Clement"},
-        {id : 2, message : "Hi", author : "Thanos"}
-    ]);
-    const socket = useSocket();
-    useEffect(() => {
-        const handleMessages = (msg: string, sender: string) => {
-            console.log("Received message from", sender, ":", msg);
-            setMessages((prevMessages) => [...prevMessages, 
-                {id : prevMessages.length + 1, message : msg , author : sender}]);
-
-        }
-
-        return socket.onMessage(handleMessages);
-    }, [socket]);
-
-    useEffect(() => {
-        console.log(messages);
-        
-    }
-    , [messages]);
-
+export default function ChatContainer({convoId, messages} : {convoId: number | null, messages: Message[]}) {
+   
     return (
         <div id='chat-container'>
             {messages.map((message, index) => (

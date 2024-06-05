@@ -4,20 +4,23 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
 contextBridge.exposeInMainWorld("MessageAPI", {
-    addMessageListener(callback: (msg: unknown, sender: string) => void) {
+    addMessageListener(
+        callback: (msg: unknown, sender: string, convoId: number) => void
+    ) {
         const wrappedCallback = (
             _: IpcRendererEvent,
             msg: unknown,
-            sender: string
+            sender: string,
+            convoId: number
         ) => {
             console.log("Received message from main:", msg);
-            callback(msg, sender);
+            callback(msg, sender, convoId);
         };
         ipcRenderer.on("socket-message", wrappedCallback);
         return () => ipcRenderer.off("socket-message", wrappedCallback);
     },
-    send(msg: unknown) {
-        console.log("Sending message from preload:", msg);
-        ipcRenderer.send("socket-message", msg);
+    send(msg: unknown, sender: string, convoId: number) {
+        console.log("Sending message from preload:", msg, sender, convoId);
+        ipcRenderer.send("socket-message", msg, sender, convoId);
     },
 });

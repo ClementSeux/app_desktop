@@ -2,15 +2,23 @@
 import React from '@vitejs/plugin-react';
 import Home from './Pages/Home';
 import { SocketProvider } from './Hooks/useSocketProvider';
+import { Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+
 
 
 
 export default function App() {
     return (
-        <div>
-            <SocketProvider>
-                <Home />
-            </SocketProvider>
-        </div>
+        <SocketProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                </Routes>      
+            </Router>
+        </SocketProvider>
+        
     );
 }

@@ -6,16 +6,26 @@ import React, {
 } from "react";
 
 export type AppSocket  = {
-    onMessage(callback: (msg: unknown, sender: string) => void):  void;
-    send(msg: unknown): void;
+    onMessage(callback: (
+        msg: unknown, 
+        sender: string, 
+        convoId: number
+    ) => void):  void;
+    send(msg: unknown, sender: string, convoId: number): void;
     
 };
 
 declare global {
     interface Window {
         MessageAPI: {
-            addMessageListener: (callback: (msg: unknown, sender: string) => void) => void;
-            send(msg: unknown): void;
+            addMessageListener: (
+                callback: (
+                    msg: unknown, 
+                    sender: string, 
+                    convoId: number
+                ) => void) => void;
+            send(msg: unknown, sender: string, convoId: number): void;
+
         }
     }
 }
@@ -29,9 +39,9 @@ onMessage(callback) {
     console.log("Adding message listener socket provider");
     return window.MessageAPI.addMessageListener(callback);
    },
-send(msg) {
-    console.log("Sending message socket porvider:" ,    msg);
-    window.MessageAPI.send(msg);
+send(msg, sender, convoId) {
+    console.log("Sending message socket porvider:" ,    msg, sender, convoId);
+    window.MessageAPI.send(msg, sender, convoId);
     }
 }), []);
 

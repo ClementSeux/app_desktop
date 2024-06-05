@@ -1,6 +1,10 @@
 import { Server } from "socket.io";
 
 function main() {
+    const convos = [
+        { users: ["Clement", "Alice"], id: 4526 },
+        { users: ["Clement", "Thanos"], id: 4529 },
+    ];
     const port = 3000;
 
     const io = new Server(port, {
@@ -11,10 +15,13 @@ function main() {
 
     io.on("connection", (socket) => {
         console.log("a user connected");
-        socket.on("message", (msg, sender) => {
-            console.log("message: " + msg + " from " + sender);
-            io.emit("message", msg, sender);
-        });
+        for (const convo of convos) {
+            socket.on(`message-${convo.id}`, (msg, sender) => {
+                console.log("message: " + msg + " from " + sender);
+                // io.emit(`new-convo`, convo.id);
+                io.emit(`message-${convo.id}`, msg, sender);
+            });
+        }
     });
 
     process.on("SIGINT", () => {

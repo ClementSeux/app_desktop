@@ -2,13 +2,17 @@ import React from 'react';
 import { useState } from 'react';
 import { useSocket } from '../Hooks/useSocketProvider';
 
+interface MessageSendFormProps {
+    convoId: number;
+}
 
-const MessageSendForm = () => {
+const MessageSendForm = ({ convoId }: MessageSendFormProps) => {
+ 
   const [message, setMessage] = useState<string>("");
   const socket = useSocket();
 
   const sendMessage = () => {
-    socket.send( message);
+    socket.send( message, "Clement", convoId);
     setMessage("");
   };
 

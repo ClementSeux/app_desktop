@@ -1,7 +1,20 @@
-body {
+body,
+#root,
+#root > div {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+  width: auto;
+  margin: 0;
+  padding: 0;
 }
 
 #home-screen {
@@ -9,9 +22,9 @@ body {
   width: 100%;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: end;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 #chat-container {
@@ -169,5 +182,42 @@ form button {
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #202935;
+  font-family: "Baloo 2", cursive;
+}
+
+#convlist {
+  color: #ece5ce;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #260e35;
+  border-right: 3px solid #c8c8a9;
+  height: 100vh;
+  min-width: min(20%, 200px);
+}
+#convlist .chat {
+  font-family: "Baloo 2", cursive;
+  width: 100%;
+}
+#convlist .chat .convo {
+  max-height: 100px;
+  position: relative;
+  padding: 8px 16px;
+  border-bottom: 1px solid #c8c8a9;
+}
+#convlist .chat .convo.new::after {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #d943fe;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   font-family: "Baloo 2", cursive;
 }/*# sourceMappingURL=chat.css.map */

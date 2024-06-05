@@ -5,10 +5,23 @@ $color-beige: #ece5ce;
 $color-yellow: #260e35;
 $color-pink: #d943fe;
 
-body {
+body,
+#root,
+#root > div {
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    width: auto;
+    margin: 0;
+    padding: 0;
 }
 
 #home-screen {
@@ -16,9 +29,9 @@ body {
     width: 100%;
     margin: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 #chat-container {
     display: flex;
@@ -192,5 +205,44 @@ form {
         letter-spacing: 3px;
         color: $color-brown;
         font-family: "Baloo 2", cursive;
+    }
+}
+
+#convlist {
+    color: $color-beige;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: $color-yellow;
+    border-right: 3px solid $color-green;
+    height: 100vh;
+    min-width: min(20%, 200px);
+
+    & .chat {
+        font-family: "Baloo 2", cursive;
+        width: 100%;
+
+        & .convo {
+            max-height: 100px;
+            position: relative;
+            padding: 8px 16px;
+            border-bottom: 1px solid $color-green;
+            &.new::after {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                content: "";
+                width: 10px;
+                height: 10px;
+                border-radius: 100px;
+                background-color: $color-pink;
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-family: "Baloo 2", cursive;
+            }
+        }
     }
 }
